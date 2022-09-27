@@ -35,6 +35,7 @@ export function Login() {
         <Aside>
           <Title>
             <h1>My chat online</h1>
+            
           </Title>
           <IconLottie>
             <ContainerLottie>

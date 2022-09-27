@@ -12,23 +12,33 @@ export const Form = styled.form`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  
+
   .link {
     padding: 10px;
     text-align: center;
-    color: red;
+    color: #fff;
     font-size: 15px;
     text-decoration: none;
     font-weight: 400;
     margin-top: 30px;
     width: 20rem;
-    background: #192a56;
-    opacity: 0.3;
+    background: rgb(0, 103, 173);
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 103, 173, 1) 36%,
+      rgba(32, 128, 242, 1) 70%,
+      rgba(23, 103, 204, 1) 97%
+    );
     border-radius: 8px;
   }
   .link:hover {
-    transition: all linear;
-    opacity: 1;
+    transition: all linear 0.3s ease;
+    background: linear-gradient(
+      to top,
+      rgba(0, 103, 173, 1) 36%,
+      rgba(32, 128, 242, 1) 70%,
+      rgba(23, 103, 204, 1) 97%
+    );
   }
 `;
 export const Title = styled.div`
