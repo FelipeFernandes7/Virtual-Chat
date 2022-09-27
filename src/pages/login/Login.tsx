@@ -24,12 +24,8 @@ export function Login() {
 
   const handleLogin = async (event: FormEvent) => {
     event.preventDefault();
-    if (!email) {
-      toast.error("Campo email obrigatório", { theme: "colored" });
-      return;
-    }
-    if (!password) {
-      toast.error("Campo senha obrigatório", { theme: "colored" });
+    if (!email || !password) {
+      toast.error("Campo email e senha obrigatórios", { theme: "colored" });
       return;
     }
   };
