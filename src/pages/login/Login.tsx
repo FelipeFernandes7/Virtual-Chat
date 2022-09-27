@@ -31,7 +31,7 @@ export function Login() {
       toast.error("Campo senha obrigatório", { theme: "colored" });
       return;
     }
-    if (!password || !password) {
+    if (!password && !password) {
       toast.error("Campo email e senha obrigatório", { theme: "colored" });
       return;
     }
