@@ -26,14 +26,10 @@ export function Login() {
     event.preventDefault();
     if (!email) {
       toast.error("Campo email obrigatório", { theme: "colored" });
-      return
+      return;
     }
     if (!password) {
       toast.error("Campo senha obrigatório", { theme: "colored" });
-      return;
-    }
-    if (!password && !password) {
-      toast.error("Campo email e senha obrigatório", { theme: "colored" });
       return;
     }
   };
