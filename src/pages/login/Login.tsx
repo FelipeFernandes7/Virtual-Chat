@@ -24,7 +24,7 @@ export function Login() {
       <Container>
         <Aside>
           <Title>
-            <h1>ChatBot</h1>
+            <h1>My chat online</h1>
           </Title>
           <IconLottie>
             <ContainerLottie>
