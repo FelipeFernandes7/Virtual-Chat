@@ -26,15 +26,19 @@ export function Register() {
   const handleRegister = (e: FormEvent) => {
     e.preventDefault();
     if (!email) {
-      toast.error("Campo e-mail obrigatório", { theme: "colored" });
+      toast.warning("Campo e-mail obrigatório");
       return;
     }
     if (!password || !confPassword) {
-      toast.error("Campo senha e confirmar senha obrigatório", {
-        theme: "colored",
-      });
+      toast.warning("Campo senha e confirmar senha obrigatório");
       return;
     }
+
+    if (password !== confPassword) {
+      toast.warning("as senhas não se coincidem");
+      return;
+    }
+
     if (password || confPassword || email) {
       toast.success("Cadastrado com sucesso!", { theme: "colored" });
       return;
