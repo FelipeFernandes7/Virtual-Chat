@@ -12,6 +12,7 @@ import {
   Title,
   TitleLogin,
 } from "./styles";
+import './responsive.scss';
 import { FormEvent, useRef, useState } from "react";
 import Lottie, { LottieRefCurrentProps } from "lottie-react";
 import { toast } from "react-toastify";
@@ -31,8 +32,8 @@ export function Login() {
   };
   return (
     <>
-      <Container>
-        <Aside>
+      <Container className="containerResponsive">
+        <Aside className="responsiveAside">
           <Title>
             <h1>My chat online</h1>
             
@@ -52,7 +53,7 @@ export function Login() {
           <strong>Feito para você se divertir e passar o tempo</strong>
         </Aside>
 
-        <Form>
+        <Form className="responsiveForm">
           <TitleLogin>
             <h1>Login</h1>
           </TitleLogin>
