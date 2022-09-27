@@ -3,6 +3,7 @@ import { ToastContainer } from "react-toastify";
 import { Login } from "./pages/login/Login";
 import 'react-toastify/dist/ReactToastify.min.css';
 import 'react-toastify/dist/ReactToastify.css' ;
+import { Register } from "./pages/register/Register";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
             />
         <Routes>
           <Route path="/" element={<Login />} />
+          <Route path="/register" element={<Register />} />
         </Routes>
       </BrowserRouter>
     </div>

@@ -80,7 +80,7 @@ export function Login() {
               <button onClick={handleLogin}>Entrar</button>
             </DivBtn>
           </ContainerForm>
-          <Link className="link" to={""}>
+          <Link className="link" to={"/register"}>
             Registrar
           </Link>
         </Form>
