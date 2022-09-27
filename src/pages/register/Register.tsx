@@ -1,4 +1,6 @@
-import { FormEvent, useState } from "react";
+import { FormEvent, useRef, useState } from "react";
+import chatAnimate from "../../lottie/chatAnimation.json";
+
 import {
   Container,
   ContainerForm,
@@ -11,14 +13,17 @@ import {
 import "./responsiveRegister.scss";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { Aside, ContainerLottie, IconLottie, Title } from "../login/styles";
+import Lottie, { LottieRefCurrentProps } from "lottie-react";
 
 export function Register() {
+  const iconRef = useRef<LottieRefCurrentProps | null>(null);
   const [confPassword, setConfPassword] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const navigate = useNavigate();
 
-  const handleRegister = (e:FormEvent) => {
+  const handleRegister = (e: FormEvent) => {
     e.preventDefault();
     if (!email) {
       toast.error("Campo e-mail obrigatório", { theme: "colored" });
@@ -35,12 +40,30 @@ export function Register() {
       return;
     }
     setTimeout(() => {
-      navigate('/');
+      navigate("/");
     }, 4000);
   };
   return (
     <>
       <Container className="containerResponsive">
+        <Aside className="responsiveAside">
+          <Title>
+            <h1>My chat online</h1>
+          </Title>
+          <IconLottie>
+            <ContainerLottie>
+              <Lottie
+                className="lottie"
+                lottieRef={iconRef}
+                style={{ width: 500, height: 400, marginBottom: 10 }}
+                animationData={chatAnimate}
+                loop={true}
+                autoplay={true}
+              />
+            </ContainerLottie>
+          </IconLottie>
+          <strong>Feito para você se divertir e passar o tempo</strong>
+        </Aside>
         <FormRegister className="responsiveForm">
           <TitleRegister>
             <h1>Cadastrar</h1>
