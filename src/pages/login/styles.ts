@@ -12,6 +12,7 @@ export const Form = styled.form`
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  
   .link {
     padding: 10px;
     text-align: center;

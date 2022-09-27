@@ -12,13 +12,32 @@ import {
   Title,
   TitleLogin,
 } from "./styles";
-import { useRef, useState } from "react";
+import { FormEvent, useRef, useState } from "react";
 import Lottie, { LottieRefCurrentProps } from "lottie-react";
+import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 
 export function Login() {
   const iconRef = useRef<LottieRefCurrentProps | null>(null);
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
 
+  const handleLogin = async (event: FormEvent) => {
+    event.preventDefault();
+    if (!password && !password) {
+      toast.error("Campo email e senha obrigatório", { theme: "colored" });
+      return;
+    }
+    if (!email) {
+      toast.error("Campo email obrigatório", { theme: "colored" });
+      return;
+    }
+    if (!password) {
+      toast.error("Campo senha obrigatório", { theme: "colored" });
+      return;
+    }
+    
+  };
   return (
     <>
       <Container>
@@ -50,17 +69,27 @@ export function Login() {
               <input
                 type={"email"}
                 name="email"
+                value={email}
+                onChange={(event) => setEmail(event.target.value)}
                 placeholder="example@gmail.com"
               />
             </EmailField>
             <PasswordField>
-              <input type={"password"} name="password" placeholder="Senha" />
+              <input
+                type={"password"}
+                name="password"
+                placeholder="Senha"
+                value={password}
+                onChange={(event) => setPassword(event.target.value)}
+              />
             </PasswordField>
             <DivBtn>
-              <button>Entrar</button>
+              <button onClick={handleLogin}>Entrar</button>
             </DivBtn>
           </ContainerForm>
-            <Link className="link" to={''} >Registrar</Link>
+          <Link className="link" to={""}>
+            Registrar
+          </Link>
         </Form>
       </Container>
     </>

@@ -11,11 +11,14 @@
   "dependencies": {
     "@types/node": "^18.7.22",
     "@types/react-lottie": "^1.2.6",
+    "firebase": "^9.10.0",
     "lottie-react": "^2.3.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.4.1",
-    "styled-components": "^5.3.5"
+    "react-toastify": "^9.0.8",
+    "styled-components": "^5.3.5",
+    "zustand": "^4.1.1"
   },
   "devDependencies": {
     "@types/react": "^18.0.17",
