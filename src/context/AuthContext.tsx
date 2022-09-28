@@ -1,6 +1,6 @@
-import { createContext, ReactNode, useEffect, useState } from "react";
 import firebase from "firebase/compat";
-import { auth } from "../firebase/firebase";
+import { createContext, ReactNode, useEffect, useState } from "react";
+import { auth, db } from "../firebase/firebase";
 
 type User = {
   id: string;
@@ -44,10 +44,14 @@ export function AuthContextProvider(props: AuthContextProviderProps) {
     };
   }, []);
 
-  const signInWithGoogle = async () => {
+  async function signInWithGoogle() {
     const provider = new firebase.auth.GoogleAuthProvider();
-
+    const credential = firebase.auth.GoogleAuthProvider.credential();
+    const token = credential.accessToken;
     const result = await auth.signInWithPopup(provider);
+    setUser(user)
+    sessionStorage.setItem("@AuthFirebase:token", token as string)
+    sessionStorage.setItem("@AuthFirebase:user", JSON.stringify(user))
 
     if (result.user) {
       const { displayName, photoURL, uid } = result.user;
@@ -62,7 +66,7 @@ export function AuthContextProvider(props: AuthContextProviderProps) {
         avatar: photoURL,
       });
     }
-  };
+  }
 
   return (
     <AuthContext.Provider value={{ user, signInWithGoogle }}>

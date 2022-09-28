@@ -1,4 +1,9 @@
 import chatAnimate from "../../lottie/chatAnimation.json";
+import { FormEvent, useRef, useState } from "react";
+import Lottie, { LottieRefCurrentProps } from "lottie-react";
+import { toast } from "react-toastify";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../../hooks/useAuth";
 import {
   Aside,
   Container,
@@ -12,16 +17,15 @@ import {
   Title,
   TitleLogin,
 } from "./styles";
-import './responsive.scss';
-import { FormEvent, useRef, useState } from "react";
-import Lottie, { LottieRefCurrentProps } from "lottie-react";
-import { toast } from "react-toastify";
-import { Link } from "react-router-dom";
+import iconGoogle from "../../assets/google.png";
+import "./responsive.scss";
 
 export function Login() {
   const iconRef = useRef<LottieRefCurrentProps | null>(null);
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+  const { user, signInWithGoogle } = useAuth();
+  const navigate = useNavigate();
 
   const handleLogin = async (event: FormEvent) => {
     event.preventDefault();
@@ -30,13 +34,21 @@ export function Login() {
       return;
     }
   };
+
+  async function handleCreateRoom(e:FormEvent) {
+    e.preventDefault()
+    if (!user) {
+      await signInWithGoogle();
+    }
+
+    navigate("/home");
+  }
   return (
     <>
       <Container className="containerResponsive">
         <Aside className="responsiveAside">
           <Title>
             <h1>My chat online</h1>
-            
           </Title>
           <IconLottie>
             <ContainerLottie>
@@ -78,6 +90,11 @@ export function Login() {
             </PasswordField>
             <DivBtn>
               <button onClick={handleLogin}>Entrar</button>
+            </DivBtn>
+            <DivBtn>
+              <button className="btnGoogle" onClick={handleCreateRoom}>
+                <img src={iconGoogle} alt="Google" /> Entrar com o Google
+              </button>
             </DivBtn>
           </ContainerForm>
           <Link className="link" to={"/register"}>

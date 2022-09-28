@@ -86,7 +86,7 @@ export const DivBtn = styled.div`
     font-size: 15px;
     color: #fff;
     font-family: "Poppins";
-    font-weight: 600;
+    font-weight: 400;
     width: 20rem;
     padding: 10px;
     border: none;
@@ -105,6 +105,23 @@ export const DivBtn = styled.div`
       rgba(131, 16, 16, 1) 29%,
       rgba(186, 8, 45, 1) 99%
     );
+  }
+  .btnGoogle{
+    display: flex;
+    align-items: center;
+    background: #ffff;
+    color: #623bd3;
+    text-align: center;
+    img{
+      width: 20px;
+      height: 20px;
+      margin-right: 3rem;
+      margin-left: 10px;
+    }
+  }
+  .btnGoogle:hover{
+    transition: linear 0.3s ease;
+    background: #f5f6fa;
   }
 `;
 
