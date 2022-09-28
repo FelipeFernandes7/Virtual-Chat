@@ -1,4 +1,4 @@
-import { FormEvent, useRef, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import chatAnimate from "../../lottie/chatAnimation.json";
 
 import {
@@ -7,6 +7,7 @@ import {
   DivBtn,
   EmailField,
   FormRegister,
+  NameField,
   PasswordField,
   TitleRegister,
 } from "./styles";
@@ -15,38 +16,73 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { Aside, ContainerLottie, IconLottie, Title } from "../login/styles";
 import Lottie, { LottieRefCurrentProps } from "lottie-react";
+import firebase from "firebase/compat";
+import { auth } from "../../firebase/firebase";
 
+type User = {
+  id: string;
+  name: string;
+  avatar: string;
+};
 export function Register() {
   const iconRef = useRef<LottieRefCurrentProps | null>(null);
   const [confPassword, setConfPassword] = useState("");
+  const [displayName, setDisplayName] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+  const [user, setUser] = useState<User>();
   const navigate = useNavigate();
 
-  const handleRegister = (e: FormEvent) => {
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        const { displayName, photoURL, uid } = user;
+
+        if (!displayName || !photoURL) {
+          throw new Error("Missing information from Google Account.");
+        }
+
+        setUser({
+          id: uid,
+          name: displayName,
+          avatar: photoURL,
+        });
+      }
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, []);
+
+  const enterWithEmailAndPassword = async (e: FormEvent) => {
     e.preventDefault();
+    if (!displayName) {
+      toast.warning("Campo nome obrigatório");
+      return;
+    }
     if (!email) {
       toast.warning("Campo e-mail obrigatório");
       return;
     }
     if (!password || !confPassword) {
-      toast.warning("Campo senha e confirmar senha obrigatório");
+      toast.warning("Campo senha e confirmar senha obrigatórios");
       return;
     }
-
-    if (password !== confPassword) {
-      toast.warning("as senhas não se coincidem");
-      return;
-    }
-
-    if (password || confPassword || email) {
+    if (password || email || displayName) {
+      await firebase
+        .auth()
+        .createUserWithEmailAndPassword(email, password)
+        .then((user) => {
+          console.log("usuário", user);
+        });
       toast.success("Cadastrado com sucesso!", { theme: "colored" });
-      return;
     }
     setTimeout(() => {
       navigate("/");
-    }, 4000);
+    }, 3000);
   };
+
   return (
     <>
       <Container className="containerResponsive">
@@ -73,6 +109,15 @@ export function Register() {
             <h1>Cadastrar</h1>
           </TitleRegister>
           <ContainerForm>
+            <NameField>
+              <input
+                type={"text"}
+                name="displayName"
+                value={displayName}
+                onChange={(event) => setDisplayName(event.target.value)}
+                placeholder="Nome usuário"
+              />
+            </NameField>
             <EmailField>
               <input
                 type={"email"}
@@ -83,25 +128,51 @@ export function Register() {
               />
             </EmailField>
             <PasswordField>
-              <input
-                type={"password"}
-                name="password"
-                placeholder="Senha"
-                value={password}
-                onChange={(event) => setPassword(event.target.value)}
-              />
+              {password.length === 5 ? (
+                <>
+                  <input
+                    type={"password"}
+                    name="password"
+                    placeholder="Senha"
+                    value={password}
+                    onChange={(event) => setPassword(event.target.value)}
+                  />
+                  <p>a senha deve conter pelo menos 6 caractéris</p>
+                </>
+              ) : (
+                <input
+                  type={"password"}
+                  name="password"
+                  placeholder="Senha"
+                  value={password}
+                  onChange={(event) => setPassword(event.target.value)}
+                />
+              )}
             </PasswordField>
             <PasswordField>
-              <input
-                type={"password"}
-                name="password"
-                placeholder="Confirmar Senha"
-                value={confPassword}
-                onChange={(event) => setConfPassword(event.target.value)}
-              />
+              {confPassword !== password ? (
+                <>
+                  <input
+                    type={"password"}
+                    name="password"
+                    placeholder="Senha"
+                    value={confPassword}
+                    onChange={(event) => setConfPassword(event.target.value)}
+                  />
+                  <p>a senhas não coincidem</p>
+                </>
+              ) : (
+                <input
+                  type={"password"}
+                  name="password"
+                  placeholder="Senha"
+                  value={confPassword}
+                  onChange={(event) => setConfPassword(event.target.value)}
+                />
+              )}
             </PasswordField>
             <DivBtn>
-              <button onClick={handleRegister}>Entrar</button>
+              <button onClick={enterWithEmailAndPassword}>Entrar</button>
             </DivBtn>
           </ContainerForm>
         </FormRegister>

@@ -62,10 +62,34 @@ export const ContainerForm = styled.div`
   flex-direction: column;
   flex-wrap: wrap;
 `;
+
 export const EmailField = styled.div`
   display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   flex-wrap: wrap;
 
+  input {
+    color: #fff;
+    padding: 9px;
+    border: 1px solid #fff;
+    border-radius: 8px;
+    width: 20rem;
+    background: transparent;
+    ::placeholder {
+      color: #ecf0f1;
+      padding-left: 5px;
+    }
+  }
+`
+export const NameField = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
   input {
     color: #fff;
     padding: 9px;
@@ -82,8 +106,16 @@ export const EmailField = styled.div`
 export const PasswordField = styled.div`
   margin-top: 30px;
   display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   flex-wrap: wrap;
-
+   p{
+    text-align: left;
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+   }
   input {
     color: #fff;
     padding: 9px;
