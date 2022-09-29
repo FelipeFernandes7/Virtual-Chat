@@ -5,6 +5,7 @@ import "react-toastify/dist/ReactToastify.min.css";
 import "react-toastify/dist/ReactToastify.css";
 import { Register } from "./pages/register/Register";
 import { AuthContextProvider } from "./context/AuthContext";
+import { Home } from "./pages/home/Home";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/home" element={< Home/>} />
           </Routes>
         </AuthContextProvider>
       </BrowserRouter>

@@ -33,15 +33,14 @@ export function Login() {
       toast.error("Campo email e senha obrigatórios", { theme: "colored" });
       return;
     }
+    navigate("/home");
   };
 
-  async function handleCreateRoom(e:FormEvent) {
-    e.preventDefault()
+  async function handleCreateRoom(e: FormEvent) {
+    e.preventDefault();
     if (!user) {
       await signInWithGoogle();
     }
-
-    navigate("/home");
   }
   return (
     <>
