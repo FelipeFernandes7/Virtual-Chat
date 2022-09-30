@@ -13,7 +13,7 @@ export const FormRegister = styled.form`
   justify-content: center;
   flex-direction: column;
 `;
-  
+
 export const TitleRegister = styled.div`
   margin-bottom: 2rem;
   display: flex;
@@ -29,6 +29,12 @@ export const DivBtn = styled.div`
   justify-content: center;
   align-items: center;
   margin-top: 30px;
+  .disabled {
+    opacity: 0.2;
+  }
+  .disabled:hover {
+    opacity: 0.2;
+  }
 
   button {
     text-align: center;
@@ -82,7 +88,7 @@ export const EmailField = styled.div`
       padding-left: 5px;
     }
   }
-`
+`;
 export const NameField = styled.div`
   display: flex;
   justify-content: center;
@@ -110,12 +116,12 @@ export const PasswordField = styled.div`
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-   p{
+  p {
     text-align: left;
     color: red;
     font-size: 12px;
     margin-top: 5px;
-   }
+  }
   input {
     color: #fff;
     padding: 9px;

@@ -172,7 +172,19 @@ export function Register() {
               )}
             </PasswordField>
             <DivBtn>
-              <button onClick={enterWithEmailAndPassword}>Entrar</button>
+              {password.length < 6 ||
+              confPassword.length < 6 ||
+              password !== confPassword ? (
+                <button
+                  className="disabled"
+                  disabled
+                  onClick={enterWithEmailAndPassword}
+                >
+                  Entrar
+                </button>
+              ) : (
+                <button onClick={enterWithEmailAndPassword}>Entrar</button>
+              )}
             </DivBtn>
           </ContainerForm>
         </FormRegister>
